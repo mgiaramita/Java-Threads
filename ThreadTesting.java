@@ -1,8 +1,14 @@
-//import
+/*
+  Spawns 4 threads. Each one has 5 'bits' to add to the counter.
+  Every time the counter is increased the value is printed to the console.
+  When a thread runs out of bits its execution stops. The final count
+  printed will be => (# Threads)*(5 bits per thread)
+*/
 
 class TestThread implements Runnable{
 	private int id, bits;
 
+	static Object lock = new Object();
 	static int counter = 0;
 
 	public TestThread(int id){
@@ -18,7 +24,7 @@ class TestThread implements Runnable{
 		}
 	}
 	public void incrementcounter(){
-		synchronized(this){
+		synchronized(lock){
 			counter++;
 			System.out.println(counter);
 		}
